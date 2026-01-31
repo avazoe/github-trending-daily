@@ -1,0 +1,14 @@
+node_modules/
+*.log
+.env
+.DS_Store
+
+# Skill files (installed locally)
+.agent/
+.agents/
+.claude/
+.codex/
+.gemini/
+.github/skills/
+.opencode/
+.qwen/

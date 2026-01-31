@@ -1,0 +1,14 @@
+{
+  "name": "github-trending-daily",
+  "version": "1.0.0",
+  "description": "Daily GitHub Trending summary delivered via email",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "resend": "^4.0.1"
+  }
+}
