@@ -1,5 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk';
-import { Resend } from 'resend';
+import formData from 'form-data';
+import Mailgun from 'mailgun.js';
 
 // Configuration
 const CONFIG = {
@@ -16,7 +17,8 @@ const CONFIG = {
   anthropicApiKey: process.env.ANTHROPIC_API_KEY,
   anthropicBaseUrl: process.env.ANTHROPIC_BASE_URL || 'https://open.bigmodel.cn/api/anthropic',
   model: process.env.MODEL || 'glm-4.7',
-  resendApiKey: process.env.RESEND_API_KEY,
+  mailgunApiKey: process.env.MAILGUN_API_KEY,
+  mailgunDomain: process.env.MAILGUN_DOMAIN,
 };
 
 /**
@@ -269,18 +271,22 @@ function formatAsEmail(summary) {
 }
 
 /**
- * Send email using Resend
+ * Send email using Mailgun
  */
 async function sendEmail(htmlContent) {
-  const resend = new Resend(CONFIG.resendApiKey);
+  const mailgun = new Mailgun(formData);
+  const mg = mailgun.client({
+    username: 'api',
+    key: CONFIG.mailgunApiKey,
+  });
 
   const today = new Date().toLocaleDateString('zh-CN');
 
   console.log(`Sending email to ${CONFIG.recipientEmail}...`);
 
-  const result = await resend.emails.send({
-    from: CONFIG.fromEmail,
-    to: CONFIG.recipientEmail,
+  const result = await mg.messages.create(CONFIG.mailgunDomain, {
+    from: `GitHub Trending <mailgun@${CONFIG.mailgunDomain}>`,
+    to: [CONFIG.recipientEmail],
     subject: `GitHub Trending 每日总结 - ${today}`,
     html: htmlContent,
   });

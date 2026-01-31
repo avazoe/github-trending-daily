@@ -9,6 +9,6 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.1",
-    "resend": "^4.0.1"
+    "mailgun.js": "^10.2.1"
   }
 }

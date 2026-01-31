@@ -28,7 +28,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
           MODEL: ${{ secrets.MODEL }}
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
+          MAILGUN_DOMAIN: ${{ secrets.MAILGUN_DOMAIN }}
           RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
-          FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
         run: node index.js
